@@ -1,12 +1,12 @@
 ---
 permalink: /
-title: "floflo regol"
-excerpt: "About me"
+title: "Welcome to the party"
+excerpt: "this"
 author_profile: true
 redirect_from: 
   - /about/
   - /about.html
 ---
 
-Welcome to the party
-======
+
+I'm a master student from the department of Electrical and Computer Engineering at Mcgill University.
