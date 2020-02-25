@@ -12,5 +12,3 @@ redirect_from:
 I'm a master student from the department of Electrical and Computer Engineering at Mcgill University.
 
 
-
-![](images/output.gif)
