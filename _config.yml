@@ -57,7 +57,7 @@ yandex_site_verification :
 
 # Social Sharing
 twitter:
-  username               : &twitter
+  username               : 
 facebook:
   username               :
   app_id                 :
@@ -81,8 +81,8 @@ analytics:
 # Site Author
 author:
   name             : "Florence Regol"
-  avatar           : "floflo.jpeg"
-  bio              : "Happy second year master student."
+  avatar           : "floflo.jpg"
+  bio              : "I'm a first year PhD student from the department of Electrical and Computer Engineering at Mcgill University."
   location         : "Montreal, Quebec"
   employer         :
   pubmed           : #"https://www.ncbi.nlm.nih.gov/pubmed/?term=john+snow"

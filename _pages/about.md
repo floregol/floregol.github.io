@@ -1,6 +1,6 @@
 ---
 permalink: /
-title: "Welcome to the party"
+title: "Florence Regol"
 excerpt: "this"
 author_profile: true
 redirect_from: 
