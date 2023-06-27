@@ -1,0 +1,87 @@
+
+
+<html>
+<head>
+    <title>Active Learning for Humans</title>
+    <meta charset='UTF-8'>
+    <meta content='width=device-width, initial-scale=1' name='viewport'/>
+
+    <meta name='description' content='This is a description of the project.'>
+     
+    <meta name='keywords' content='
+        machine learning,
+        statistical machine learning,
+        bayesian inference,
+        statistics,
+        computational statistics,
+        deep learning,
+        computer science
+    '>
+    <meta name='author' content='Florence Regol'>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+      </script>
+      <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+      </script>
+    <link href='/style_2.css' rel='stylesheet'/>
+    <link rel="icon" href="icon.png">
+   
+</head> 
+<body> <div class='front-matter'><div class='wrap'><h1> Active Learning for Humans</h1></div></div></div>
+</div> 
+    <div class='wrap article'>
+        <h2>Abstract for everyone</h2>
+        <p style='text-align:justify'>
+            Students that are learning a discriminative task can be seen as <b>imperfect black box classifiers</b> undergoing training.
+            <br> Besides one's learning capacities and environmental circumstances, a determining factor of success is the <b>material presented to them</b>. 
+            If we view the student as a classification algorithm, then this selected material can be viewed as the training dataset. 
+            Active learning is a branch of machine learning that develops methods to select the best training data that will lead to the optimal inference performance. 
+            In a way, students themselves follow a similar strategy when they prioritize some material over other for their studies. 
+            Moreover, this process is personalized since the student will of course tailor the selection to themselves; students will study harder on topics that are harder for them.
+            This connection is more apparent if we consider a learning task where the training process of both human and computer share some similarities; i.e. when the human's learning process mainly consists of looking at a lot of examples. 
+            As an example, to learn to identify tumor on patients, dentistry students will go over many benign and malign images. 
+            <br>
+            In a context like this one, can we apply active learning algorithm to <b>select the images shown to the student</b> that will improve their learning process? 
+            An active learning algorithm could identify <i style="color:rgb(12, 71, 12);">which point on the input space</i> 
+            $\rightarrow$ <i style="color:rgb(12, 71, 12);">which type of images</i>  
+            would benefit the <i style="color:rgb(12, 71, 12);">classifier</i> $\rightarrow$ 
+            <i style="color:rgb(12, 71, 12);">student</i>  the most and<i style="color:rgb(12, 71, 12);"> select those points to feed the algorithm</i>
+             $\rightarrow$ <i style="color:rgb(12, 71, 12);">show more of those images.</i> 
+        </p> <div style='text-align:center'>
+            <button class="button button2" onclick="window.location.href='http://al4human.herokuapp.com/';">Click here to participate in the experiment.</button>
+        </div> 
+        <h2>Abstract for machine learning people</h2>
+        <p style='text-align:justify'>
+        The traditional inference problem is to obtain an estimate $\hat{p}(Y|X)$ 
+        of some unknown target distribution $p^*(Y|X)$ given some datapoints
+         $\mathcal{D} = \{x_i,y_i\}^N_{i=1}$ that are presumed to be IID realizations 
+          $x, y \sim p^*(Y|X)p(X)$.
+            Here, we consider a different problem. 
+            An unknown agent $H$ is performing the traditional inference task of producing an 
+            estimate given some data: $\hat{p}  = H(\mathcal{D})$, and <b>we want to find the data $\mathcal{D}$ that will help $H$ the most</b>. 
+            We do not have direct access to that estimate $\hat{p}$, but we have control over the input data $\mathcal{D}$, and we can obtain samples from $y\sim \hat{p}(Y|X=x)$. To do so, our solution can be split in two.
+            <br>
+            Firstly, we approximate $\hat{p}$. With access to $\hat{p}$, 
+            this would be a standard active learning problem. 
+            However, since we do not have access to $\hat{p}$, we do not know how $H$ process 
+            the information $\mathcal{D}$ to form it's estimate $\hat{p}$. 
+            All we know is that $H$ is trying to learn $p^*$. 
+            The first assumption that we make is that $H$ integrated the input data to its model
+            : $\hat{p}  = H(\mathcal{D}) \implies y_i \sim \hat{p}(y_i|X=x_i)$.
+            We then consider the alternate inference problem where $\hat{p}$ is 
+            the target and frame it as a traditional inference problem:
+            we obtain an estimate $h(Y|X)$ of some unknown target distribution $\hat{p}(Y|X)$ 
+            given some datapoints $\mathcal{D} = \mathcal{D}_{init} \cup \{\tilde{x}, \tilde{y}\}$ where $\mathcal{D}_{init}$ is 
+            the dataset initially fed to $H$: $\hat{p}(Y|X) = H(\mathcal{D}_{init})$ and $\tilde{x}, \tilde{y}$ are samples from the
+             target estimate $\hat{P}$ $\tilde{x}, \tilde{y} \sim \hat{p}(Y|X=\tilde{x})$. 
+             <br>
+             Secondly, we perform active learning on our estimate $h(Y|X)$ of $\hat{p}$. Any active learning is suitable.
+            To validate that our approach is working, we can test the performance of $\hat{p}_{al} = H(\mathcal{D}_{al})$ where $\mathcal{D}_{al}$ was obtained from our active learning approach and compare it to the performance of an other  estimator $\hat{p}_{r} = H(\mathcal{D}_{r})$ where $\mathcal{D}_{r}$ is obtained by random.
+            
+            </p><p style='text-align:center'>In our setting, $H$ is actually a human trying to learn a task.</centre></p>
+            <div style='text-align:center'>
+                <button class="button button2" onclick="window.location.href='http://al4human.herokuapp.com/'">Click here to participate in the experiment.</button>
+            </div> </div>
+</body>
+</html>
