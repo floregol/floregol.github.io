@@ -37,31 +37,93 @@
            <b style="color:rgb(12, 71, 12);">right examples</b>, the person will learn faster.
         </p> 
         <p style='text-align:justify'></p>
-        <embed src="images/human_teach-crop.pdf" alt="human teaching" width="400"/>
+        <embed src="images/human_teach-crop.pdf" alt="human teaching" width="600"/>
     </p> 
     <p style='text-align:justify'>
         In machine learning, finding the best points to train an algorithm is called <b style="color:rgb(12, 71, 12);">Active Learning</b> (AL).
      </p> 
      <p style='text-align:justify'></p>
-        <embed src="images/comp_al-crop.pdf" alt="human teaching" width="400"/>
+        <embed src="images/comp_al-crop.pdf" alt="human teaching" width="600"/>
     </p> 
      <p style='text-align:justify'></p>
      Given some data $\mathcal{D}$ and model knowledge $ f_{\theta} = ML(\mathcal{D})$, the
  <b style="color:rgb(12, 71, 12);">goal</b> of AL is to find the best datapoints $\mathcal{D}^*_{\mathcal{L}} \in \mathcal{D} $ that will <b style="color:rgb(12, 71, 12);">maximize the performance</b> 
 of $f_{\theta} = ML(\mathcal{D}^*_{\mathcal{L}})$.
  </p> 
+ 
  <p style='text-align:justify'>
     Sometimes, ML and humans are called to solve the same tasks:
  </p> 
+ <img src="skin.png" alt="skin cancer classification" width="400">
+ <p>
  For example, both <b style="color:rgb(51, 112, 139);">medical students</b>  and
   <b style="color:rgb(177, 81, 52);">algorithms</b> learn to distinguish cancerous and benign images.
 Hence, we can easily hypothesize that their are helpful points  for humans
  <b style="color:rgb(51, 112, 139);"> $\mathcal{D}^*_{\mathcal{L}} \in \mathcal{D} $</b> 
 , and helpful points for algorithms  
 <b style="color:rgb(177, 81, 52);"> $\mathcal{D}^*_{\mathcal{L}} \in \mathcal{D} $</b> .
-    
+</p>
+<h3>The goal of this project is to answer the gollowing question:
+    Is there an <b>overlap</b> between those?
+    Can we teach people things faster using machine learning?</h3>
+    <p>
+    Solving for $\mathcal{D}^*_{\mathcal{L}}$ or <b>modeling a human</b>. 
+    Black box classifier $f_{\blacksquare}(\cdot) $ that we can query:
+    $$ \hat{y} = f_{\blacksquare}(x).$$
+    Black box learning algorithm $\blacksquare(\cdot)$:
+    $\blacksquare(\mathcal{D}_{\mathcal{L}} ) = f_{\blacksquare}(\cdot) . $
+    <b>Task</b> $\rightarrow$ Find the datapoints 
+    <b style="color:rgb(51, 112, 139);">$ \mathcal{D}^*_{\mathcal{L}} \in \mathcal{D}$</b>
+     that maximize the performance $s()$ of $f_{\blacksquare}(\cdot) $:
+     <b style="color:rgb(51, 112, 139);">   $$
+        \mathcal{D}^*_{\mathcal{L}} =  argmax_{\mathcal{D}_{\mathcal{L}}  \in \mathcal{D}}  \Big(\blacksquare(\mathcal{D}_{\mathcal{L}} )\Big)
+            $$</b>
+         
+      Solving this might be too hard.
+    </p>
+    <p>Instead of solving:
+        <b style="color:rgb(51, 112, 139);">   $$
+            \mathcal{D}^*_{\mathcal{L}} =  argmax_{\mathcal{D}_{\mathcal{L}}  \in \mathcal{D}}  \Big(\blacksquare(\mathcal{D}_{\mathcal{L}} )\Big)
+                $$</b>
+       we find the best points for some ML algorithm $f_{\theta}$:
+       <b style="color:rgb(177, 81, 52);">   $$
+          \mathcal{D}^*_{\mathcal{L}} = argmax_{\mathcal{D}_{\mathcal{L}}  \in \mathcal{D}} s \Big(f_{\theta}(\mathcal{D}_{\mathcal{L}} )\Big)
+           $$</b>
+       and check if <b style="color:rgb(177, 81, 52);">  $ \mathcal{D}^*_{\mathcal{L}}$</b> can still be useful for $\blacksquare$ (us).
+           $\rightarrow$ we compare <b style="color:rgb(177, 81, 52);"> $f^{ \mathcal{D}^*_{\mathcal{L}}}_{\blacksquare}$</b>
+            vs $f^{\mathcal{D}^{random}_{\mathcal{L}} }_{\blacksquare}$ (initial experiment)</p>
+     
+     <p> 
+        The experiment: 
+        <li>Randomly select \textbf{\color{red}AL} or \textbf{Random}  experiment.</li>
+        <li>Show an initial training set $\data^{0}_{\mathcal{L}}$ to the user.</li> 
+        
 
-        <div style='text-align:center'>
+        <!-- \textbf{Experiment setup}:
+\begin{itemize}
+    \item Randomly select \textbf{\color{red}AL} or \textbf{Random}  experiment.
+    \item Show an initial training set $\data^{0}_{\mathcal{L}}$ to the user.  ($|\data^{0}_{\mathcal{L}}|=3$)
+     \item \begin{itemize}
+        \item \textbf{\color{red}AL:}  Train a ML algo on $\data^0_{\mathcal{L}}$.
+        \item \textbf{Random:}  Do nothing.
+    \end{itemize} 
+    \item  \begin{itemize}
+        \item \textbf{\color{red}AL} Run AL algo to obtain $
+   {\color{red}(x^*,y^*)} =    \argmax_{(x^*,y) \in \data} s \Big(f_{\theta}(\data_{\mathcal{L}} )\Big)
+    $.
+        \item \textbf{Random:}  Randomly sample $(x^*,y) \sim \data$.
+    \end{itemize} 
+    \item Show the example $(x^*,y)$ to the user and update $\data^1_{\mathcal{L}} = \data^0_{\mathcal{L}} \cup (x^*,y)$.
+    \item \textbf{Training phase} Repeat with $\data^i_{\mathcal{L}}$.(7 times)
+\end{itemize}
+\textbf{Testing phase:} 
+\\
+Evaluate user's accuracy $f^{ \color{red} \data^*_{{\mathcal{L}}}}_{\blacksquare}(x^{test})$ or $f^{\data^{random}_{\mathcal{L}} }_{\blacksquare}(x^{test})$.(13 times) -->
+
+
+     </p>
+     
+            <div style='text-align:center'>
             <button class="button button2" onclick="window.location.href='http://al4human.herokuapp.com/';">Click here to participate in the experiment.</button>
         </div> 
          </div>
