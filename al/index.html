@@ -34,61 +34,50 @@
       
         <p style='text-align:justify'>
            When teaching something new to someone, we often have the intuition that with the 
-           <b style="color:rgb(12, 71, 12);">right examples</b>, the person will learn faster.
+           <b style="color:rgb(0, 98, 205);">right examples</b>, the person will learn faster.
         </p> 
         <img src="images/human_teach.png" alt="human teaching" width="400">
        
     </p> 
     <p style='text-align:justify'>
-        In machine learning, finding the best points to train an algorithm is called <b style="color:rgb(12, 71, 12);">Active Learning</b> (AL).
+        In machine learning, finding the best points to train an algorithm is called <b style="color:rgb(217, 6, 6);">Active Learning</b> (AL).
      </p> 
      <img src="images/comp_al.png" alt="computer teaching" width="400">
      <p style='text-align:justify'></p>
-     Given some data $\mathcal{D}$ and model knowledge $ f_{\theta} = ML(\mathcal{D})$, the
- <b style="color:rgb(12, 71, 12);">goal</b> of AL is to find the best datapoints $\mathcal{D}^*_{\mathcal{L}} \in \mathcal{D} $ that will <b style="color:rgb(12, 71, 12);">maximize the performance</b> 
-of $f_{\theta} = ML(\mathcal{D}^*_{\mathcal{L}})$.
+     Given some data $\mathcal{D}$ and model knowledge $ f_{\theta} = ML(\mathcal{D})$, the goal
+ of <b>active learning</b>  is to find the best datapoints <b style="color:rgb(217, 6, 6);">$\mathcal{D}^{\mathcal{H} \in \mathcal{D} $</b> that will <b>maximize the performance</b> of our model.
+ $f_{\theta} = ML(\mathcal{D}^*_{\mathcal{L}})$.
  </p> 
  
  <p style='text-align:justify'>
-    Sometimes, ML and humans are called to solve the same tasks:
+    Often, ML and humans are called to solve the same tasks:
  </p> 
- <img src="skin.png" alt="skin cancer classification" width="400">
+ <img src="images/skin.png" alt="skin cancer classification" width="400">
  <p>
- For example, both <b style="color:rgb(51, 112, 139);">medical students</b>  and
-  <b style="color:rgb(177, 81, 52);">algorithms</b> learn to distinguish cancerous and benign images.
+ For example, both <b style="color:rgb(0, 98, 205);">medical students</b>  and
+  <b style="color:rgb(217, 6, 6);">algorithms</b> learn to distinguish cancerous and benign images.
 Hence, we can easily hypothesize that their are helpful points  for humans
- <b style="color:rgb(51, 112, 139);"> $\mathcal{D}^*_{\mathcal{L}} \in \mathcal{D} $</b> 
+ <b style="color:rgb(0, 98, 205);"> $\mathcal{D}^{\mathcal{H} \in \mathcal{D} $</b> 
 , and helpful points for algorithms  
-<b style="color:rgb(177, 81, 52);"> $\mathcal{D}^*_{\mathcal{L}} \in \mathcal{D} $</b> .
+<b style="color:rgb(217, 6, 6);"> $\mathcal{D}^{\mathcal{A} \in \mathcal{D} $</b> .
 </p>
 <h3>The goal of this project is to answer the gollowing question:
     Is there an <b>overlap</b> between those?
     Can we teach people things faster using machine learning?</h3>
     <p>
-    Solving for $\mathcal{D}^*_{\mathcal{L}}$ or <b>modeling a human</b>. 
-    Black box classifier $f_{\blacksquare}(\cdot) $ that we can query:
-    $$ \hat{y} = f_{\blacksquare}(x).$$
-    Black box learning algorithm $\blacksquare(\cdot)$:
-    $\blacksquare(\mathcal{D}_{\mathcal{L}} ) = f_{\blacksquare}(\cdot) . $
-    <b>Task</b> $\rightarrow$ Find the datapoints 
-    <b style="color:rgb(51, 112, 139);">$ \mathcal{D}^*_{\mathcal{L}} \in \mathcal{D}$</b>
-     that maximize the performance $s()$ of $f_{\blacksquare}(\cdot) $:
-     <b style="color:rgb(51, 112, 139);">   $$
-        \mathcal{D}^*_{\mathcal{L}} =  argmax_{\mathcal{D}_{\mathcal{L}}  \in \mathcal{D}}  \Big(\blacksquare(\mathcal{D}_{\mathcal{L}} )\Big)
-            $$</b>
-         
-      Solving this might be too hard.
+    Solving for $\mathcal{D}^*_{\mathcal{L}}$ or <b>modeling a human</b>
+    might be too hard.
     </p>
     <p>Instead of solving:
-        <b style="color:rgb(51, 112, 139);">   $$
+        <b style="color:rgb(0, 98, 205);">   $$
             \mathcal{D}^*_{\mathcal{L}} =  argmax_{\mathcal{D}_{\mathcal{L}}  \in \mathcal{D}}  \Big(\blacksquare(\mathcal{D}_{\mathcal{L}} )\Big)
                 $$</b>
        we find the best points for some ML algorithm $f_{\theta}$:
-       <b style="color:rgb(177, 81, 52);">   $$
+       <b style="color:rgb(217, 6, 6);">   $$
           \mathcal{D}^*_{\mathcal{L}} = argmax_{\mathcal{D}_{\mathcal{L}}  \in \mathcal{D}} s \Big(f_{\theta}(\mathcal{D}_{\mathcal{L}} )\Big)
            $$</b>
-       and check if <b style="color:rgb(177, 81, 52);">  $ \mathcal{D}^*_{\mathcal{L}}$</b> can still be useful for $\blacksquare$ (us).
-           $\rightarrow$ we compare <b style="color:rgb(177, 81, 52);"> $f^{ \mathcal{D}^*_{\mathcal{L}}}_{\blacksquare}$</b>
+       and check if <b style="color:rgb(217, 6, 6);">  $ \mathcal{D}^*_{\mathcal{L}}$</b> can still be useful for $\blacksquare$ (us).
+           $\rightarrow$ we compare <b style="color:rgb(217, 6, 6);"> $f^{ \mathcal{D}^*_{\mathcal{L}}}_{\blacksquare}$</b>
             vs $f^{\mathcal{D}^{random}_{\mathcal{L}} }_{\blacksquare}$ (initial experiment)</p>
      
      <p> 
