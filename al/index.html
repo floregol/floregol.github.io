@@ -2,7 +2,7 @@
 
 <html>
 <head>
-    <title>Active Learning for Humans</title>
+    <title>Active Learning for Humans: Can we learn faster by learning from computed-selected examples?</title>
     <meta charset='UTF-8'>
     <meta content='width=device-width, initial-scale=1' name='viewport'/>
 
@@ -28,91 +28,98 @@
     <link rel="icon" href="icon.png">
    
 </head> 
-<body> <div class='front-matter'><div class='wrap'><h1> Active Learning for Humans</h1></div></div></div>
+<body> <div class='front-matter'><div class='wrap'><h1> Active Learning for Humans</h1><h2>Can we learn faster by learning from computed-selected examples?</h2></div></div></div>
 </div> 
     <div class='wrap article'>
       
         <p style='text-align:justify'>
-           When teaching something new to someone, we often have the intuition that with the 
+           When teaching something new to someone, we often have the intuition that if we present the 
            <b style="color:rgb(0, 98, 205);">right examples</b>, the person will learn faster.
         </p> 
-        <img src="images/human_teach.png" alt="human teaching" width="400">
+       <p align="center"><img src="images/human_teach.png" alt="human teaching" width="300"></p>
        
     </p> 
     <p style='text-align:justify'>
         In machine learning, finding the best points to train an algorithm is called <b style="color:rgb(217, 6, 6);">Active Learning</b> (AL).
      </p> 
-     <img src="images/comp_al.png" alt="computer teaching" width="400">
-     <p style='text-align:justify'></p>
-     Given some data $\mathcal{D}$ and model knowledge $ f_{\theta} = ML(\mathcal{D})$, the goal
- of <b>active learning</b>  is to find the best datapoints <b style="color:rgb(217, 6, 6);">$\mathcal{D}^{\mathcal{H} \in \mathcal{D} $</b> that will <b>maximize the performance</b> of our model.
- $f_{\theta} = ML(\mathcal{D}^*_{\mathcal{L}})$.
- </p> 
+     <p align="center"><img src="images/comp_al.png" alt="computer teaching" width="300"></p>
+     
  
  <p style='text-align:justify'>
-    Often, ML and humans are called to solve the same tasks:
+    Sometimes, algorithms and humans are called to solve the same tasks. For example, both <b style="color:rgb(0, 98, 205);">medical students</b>  and
+    <b style="color:rgb(217, 6, 6);">algorithms</b> learn to distinguish cancerous from benign images:
  </p> 
- <img src="images/skin.png" alt="skin cancer classification" width="400">
+ <p align="center"> <img src="images/skin.png" alt="skin cancer classification" width="600"></p>
+ <p align="center" ><small> (Figure taken from Esteva et al., Dermatologist-level classification
+      of skin cancer with deep neural networks, 2017) </small></p>
  <p>
- For example, both <b style="color:rgb(0, 98, 205);">medical students</b>  and
-  <b style="color:rgb(217, 6, 6);">algorithms</b> learn to distinguish cancerous and benign images.
-Hence, we can easily hypothesize that their are helpful points  for humans
- <b style="color:rgb(0, 98, 205);"> $\mathcal{D}^{\mathcal{H} \in \mathcal{D} $</b> 
+ 
+Hence, for a given task, their are helpful points  for humans
+ <b style="color:rgb(0, 98, 205);"> $ \mathcal{D}^\mathcal{H} $</b> 
 , and helpful points for algorithms  
-<b style="color:rgb(217, 6, 6);"> $\mathcal{D}^{\mathcal{A} \in \mathcal{D} $</b> .
+<b style="color:rgb(217, 6, 6);"> $\mathcal{D}^\mathcal{A}  $</b> that comes from the <b>same dataset</b> $\mathcal{D}$. 
+</p> <p>
+From there, a natural question to ask is whether there is an overlap between those two sets of helpful points?
 </p>
-<h3>The research question:
-    Is there an <b>overlap</b> between those?
-    Can we teach people things faster using machine learning?</h3>
+<div class="article div highlight">
+<h3>Research question:
+    Is there an <b>overlap</b> between  <b style="color:rgb(217, 6, 6);"> $\mathcal{D}^\mathcal{A}  $</b> and  <b style="color:rgb(0, 98, 205);"> $ \mathcal{D}^\mathcal{H} $</b>?</h3>
+    <h4><span>&#8594;</span>  If the answer is yes, that means that showing <b style="color:rgb(217, 6, 6);"> $\mathcal{D}^\mathcal{A}  $</b> to a human will help them learn faster.</h4>
+
+</div>   
+
     <p>
-    Solving for $\mathcal{D}^*_{\mathcal{L}}$ or <b>modeling a human</b>
-    might be too hard.
-    </p>
-    <p>Instead of solving:
-        <b style="color:rgb(0, 98, 205);">   $$
-            \mathcal{D}^*_{\mathcal{L}} =  argmax_{\mathcal{D}_{\mathcal{L}}  \in \mathcal{D}}  \Big(\blacksquare(\mathcal{D}_{\mathcal{L}} )\Big)
-                $$</b>
-       we find the best points for some ML algorithm $f_{\theta}$:
-       <b style="color:rgb(217, 6, 6);">   $$
-          \mathcal{D}^*_{\mathcal{L}} = argmax_{\mathcal{D}_{\mathcal{L}}  \in \mathcal{D}} s \Big(f_{\theta}(\mathcal{D}_{\mathcal{L}} )\Big)
-           $$</b>
-       and check if <b style="color:rgb(217, 6, 6);">  $ \mathcal{D}^*_{\mathcal{L}}$</b> can still be useful for $\blacksquare$ (us).
-           $\rightarrow$ we compare <b style="color:rgb(217, 6, 6);"> $f^{ \mathcal{D}^*_{\mathcal{L}}}_{\blacksquare}$</b>
-            vs $f^{\mathcal{D}^{random}_{\mathcal{L}} }_{\blacksquare}$ (initial experiment)</p>
-     
-     <p> 
-        The experiment: 
-        <li>Randomly select \textbf{\color{red}AL} or \textbf{Random}  experiment.</li>
-        <li>Show an initial training set $\data^{0}_{\mathcal{L}}$ to the user.</li> 
+        This is what we aim to verify in our experiment.
+
+        <h2>The  experiment</h2>
         
 
-        <!-- \textbf{Experiment setup}:
-\begin{itemize}
-    \item Randomly select \textbf{\color{red}AL} or \textbf{Random}  experiment.
-    \item Show an initial training set $\data^{0}_{\mathcal{L}}$ to the user.  ($|\data^{0}_{\mathcal{L}}|=3$)
-     \item \begin{itemize}
-        \item \textbf{\color{red}AL:}  Train a ML algo on $\data^0_{\mathcal{L}}$.
-        \item \textbf{Random:}  Do nothing.
-    \end{itemize} 
-    \item  \begin{itemize}
-        \item \textbf{\color{red}AL} Run AL algo to obtain $
-   {\color{red}(x^*,y^*)} =    \argmax_{(x^*,y) \in \data} s \Big(f_{\theta}(\data_{\mathcal{L}} )\Big)
-    $.
-        \item \textbf{Random:}  Randomly sample $(x^*,y) \sim \data$.
-    \end{itemize} 
-    \item Show the example $(x^*,y)$ to the user and update $\data^1_{\mathcal{L}} = \data^0_{\mathcal{L}} \cup (x^*,y)$.
-    \item \textbf{Training phase} Repeat with $\data^i_{\mathcal{L}}$.(7 times)
-\end{itemize}
-\textbf{Testing phase:} 
-\\
-Evaluate user's accuracy $f^{ \color{red} \data^*_{{\mathcal{L}}}}_{\blacksquare}(x^{test})$ or $f^{\data^{random}_{\mathcal{L}} }_{\blacksquare}(x^{test})$.(13 times) -->
+         In summary, we compare the performance of humans that were shown random examples 
+        to the performance of humans that were shown examples from <b style="color:rgb(217, 6, 6);"> $\mathcal{D}^\mathcal{A}  $</b>. 
+        <h3>Highlevel overview of the experimental steps</h3>
+        <ul>
+        <li>The user arrives. </li>
+        <li>Randomly select the <b>AL</b> or <b>Random</b> mode for that user.</li>
+        <li>Show an initial training set $\mathcal{D}^{0}$ to the user.</li> 
+        <li>If the user is in <b>Random</b> mode:</li> 
+        <ul>
+            <li> Randomly select another example from $\mathcal{D}$. </li>
+            <li> The example and its label is shown to the user. </li>
+        </ul>
+        <li>If the user is in <b>AL</b> mode:</li> 
+        <ul>
+            <li> Select a random point from  <b style="color:rgb(217, 6, 6);"> $\mathcal{D}^\mathcal{A}  $</b>.</li>
+            <li> The example and its label is shown to the user. </li>
+        </ul>
+        <li>Repeat the previous step a few times. </li>
+        <li>Test the performance of the user:</li>
+        <ul>
+            <li> Select an <b>unseen point</b>. </li>
+            <li> The example is shown to the user <b>without</b> its label. </li>
+            <li> The user is asked to provide the label of the example. </li>
+        </ul>
+        <li>Repeat the previous step a few times. </li>
+        <li>Store the user's performance (the fraction of their provided labels that were correct) with the <b>mode</b>.</li>
+        </ul>
 
-
+       
      </p>
-     
-            <div style='text-align:center'>
-            <button class="button button2" onclick="window.location.href='http://al4human.herokuapp.com/';">Click here to participate in the experiment.</button>
+     <h2>Preliminary Results</h2>
+           Our preliminary results are interesting. Ealy results are leaning in 
+           favor of our hypothesis: <p>In average, humans trained with <b style="color:rgb(217, 6, 6);"> $\mathcal{D}^\mathcal{A}  $</b>  <b>outperform</b> humans trained with random examples.
+             However, this result does not come with statistical significance so it should not be taken as a definitive answer. More data is needed.
+        </p>
+            <p align="center"> <img src="images/good_start.png" alt="preliminary results" width="600"> </p>
+            <p align="center"> <b> Initial results for the color experiment. $N=40$, $AL=18$ $Random=22$. </b>**No statistical significance. </p>
+            Also, we observed the interesting phenomenon during the testing phase. The accuracy or performance of humans <b>significantly improves</b>
+            during the testing process, showing that the human <b>keeps learning</b> as they are being tested.
+            <p align="center"> <img src="images/acc_during_test.png" alt="preliminary results" width="600"> </p>
+            <p align="center"> <b> People keep learning during the testing phase, when no label is provided. </b></p>
+
+            
         </div> 
-         </div>
+        <div style='text-align:center'>
+            <button class="button button2" onclick="window.location.href='http://al4human.herokuapp.com/';">Click here to participate in the experiment.</button>
+           </div>
 </body>
 </html>
